@@ -1,0 +1,55 @@
+@import "../../styles/variables";
+
+.select {
+  height: 50px;
+  position: relative;
+  border-radius: 10px;
+  background-color: white;
+  border: 1px solid $gray-color;
+  cursor: pointer;
+}
+
+.option {
+  height: 50px;
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  font-size: 14px;
+  line-height: 20px;
+  user-select: none;
+
+  &__icon {
+    height: 30px;
+    width: 30px;
+    flex-shrink: 0;
+    border-radius: 15px;
+    margin-right: 15px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    object-fit: cover;
+  }
+
+  &:not(.active) {
+    &:hover {
+      background-color: $highlight-color;
+    }
+  }
+}
+
+.option-container {
+  background-color: white;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.arrow {
+  position: absolute;
+  right: 15px;
+  height: 30px; 
+  width: 30px;
+  top: 10px;
+  transition: all ease-in-out 0.2s;
+
+  &.up {
+    transform: rotate(180deg);
+  }
+}
