@@ -3,4 +3,16 @@
     box-shadow: 0px 4px 12px rgba(0,0,0,0.03),0px 1px 4px rgba(0,0,0,0.04),0px 20px 40px rgba(0,0,0,0.04);
     background-color: white; 
     padding: 32px;
+    transition: 0.3s ease;
+    transform: scale(1);
+
+    &.minimize{
+        transform: scale(0.9);
+        margin:auto;
+        padding: 16px;
+        border-radius: 10px;
+        background-color: #F3F4F6;
+        cursor: pointer;
+        transition: 0.3s ease;
+    }
 }

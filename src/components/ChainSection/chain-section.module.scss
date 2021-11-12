@@ -1,4 +1,13 @@
+@import "../../styles/variables";
+
 .title{
     font-size: 14px; 
     font-weight: 500;
+}
+
+.option{
+    border: 1px solid $gray-color;
+    border-radius: 10px;
+    background-color: white; 
+    flex-grow: 1;
 }

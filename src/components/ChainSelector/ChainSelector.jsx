@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import style from "./chain-selector.module.scss";
 import { ReactComponent as Arrow } from "../../assets/svgs/angle-down.svg";
+import { ChainOption as Option} from "../index";
 
 export const ChainSelector = ({ chains, activeChain, setActiveChain }) => {
   const [availableChains, setAvailableChains] = useState(chains);
@@ -36,18 +37,6 @@ export const ChainSelector = ({ chains, activeChain, setActiveChain }) => {
       )}
 
       <Arrow className={`${style.arrow} ${showOptions ? style.up : ""}`} />
-    </div>
-  );
-};
-
-const Option = ({ item, onClick, active }) => {
-  return (
-    <div
-      className={`${style.option} ${active ? style.active : ""}`}
-      onClick={onClick}
-    >
-      <img src={item.icon} alt="chain icon" className={style["option__icon"]} />
-      <span>{item.name}</span>
     </div>
   );
 };
