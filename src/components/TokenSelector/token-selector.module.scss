@@ -1,0 +1,37 @@
+@import "../../styles/variables";
+
+.tokenSelector {
+  height: 50px;
+  border-radius: 10px;
+  border: 1px solid $gray-color;
+  padding: 5px 5px 5px 15px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.tokensSection {
+  border: 1px solid $gray-color;
+  border-radius: 7px;
+  position: relative;
+}
+
+.tokenOption{
+    padding-right: 20px !important;
+}
+
+.tokenOptionList{
+  border-radius: 5px;
+}
+
+.arrow {
+  position: absolute;
+  right: 5px;
+  height: 20px;
+  width: 20px;
+  top: 10px;
+  transition: all ease-in-out 0.2s;
+
+  &.up {
+    transform: rotate(180deg);
+  }
+}

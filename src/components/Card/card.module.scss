@@ -4,7 +4,7 @@
     background-color: white; 
     padding: 32px;
     transition: 0.3s ease;
-    transform: scale(1);
+    // transform: scale(1);
 
     &.minimize{
         transform: scale(0.9);
