@@ -57,3 +57,6 @@ const Option = ({ item, onClick, active }) => {
     </div>
   );
 };
+
+// to do
+// outside click to close the dropdown
