@@ -2,8 +2,7 @@ import { useEffect, useState } from "react";
 import style from "./chain-selector.module.scss";
 import { ReactComponent as Arrow } from "../../assets/svgs/angle-down.svg";
 
-export const ChainSelector = ({ chains }) => {
-  const [activeChain, setactiveChain] = useState(false);
+export const ChainSelector = ({ chains, activeChain, setActiveChain }) => {
   const [availableChains, setAvailableChains] = useState(chains);
   const [showOptions, setShowOptions] = useState(false);
 
@@ -11,11 +10,6 @@ export const ChainSelector = ({ chains }) => {
     e.stopPropagation();
     setShowOptions(!showOptions);
   };
-
-  // to set the initial active chain
-  useEffect(() => {
-    setactiveChain(chains[0]);
-  }, [chains]);
 
   // to set the available chains
   // available chains = all chains - active chain
@@ -33,7 +27,7 @@ export const ChainSelector = ({ chains }) => {
             return (
               <Option
                 item={chain}
-                onClick={() => setactiveChain(chain)}
+                onClick={() => setActiveChain(chain)}
                 key={chain.chainId}
               />
             );
