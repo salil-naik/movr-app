@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 import style from "./token-section.module.scss";
-import { Card, TokenSelector } from "../index";
+import { Card, TokenSelector, Button, TokenOption } from "../index";
+import { ReactComponent as Arrow } from "../../assets/svgs/arrow-right.svg";
 import { useFetch } from "../../hooks/useFetch";
 
-export const TokenSection = ({ data }) => {
-  const [minVersion, setMinVersion] = useState(false);
-  const [sendAmount, setSendAmount] = useState('');
-  const [receiveAmount, setReceiveAmount] = useState('');
+export const TokenSection = ({ data, sendData, maxState, setMaxState }) => {
+  const [sendAmount, setSendAmount] = useState("");
+  const [receiveAmount, setReceiveAmount] = useState("");
   const [balance, setBalance] = useState(0);
 
   // balances
@@ -22,7 +22,7 @@ export const TokenSection = ({ data }) => {
 
   useEffect(() => {
     if (fromTokenList !== null) {
-      setSendTokens(fromTokenList.result.slice(0,5));
+      setSendTokens(fromTokenList.result.slice(0, 5));
       setActiveSendToken(fromTokenList.result[1]);
     }
   }, [fromTokenList]);
@@ -46,7 +46,7 @@ export const TokenSection = ({ data }) => {
 
   useEffect(() => {
     if (toTokenList !== null) {
-      setReceiveTokens(toTokenList.result.slice(0,5));
+      setReceiveTokens(toTokenList.result.slice(0, 5));
       setActiveReceiveToken(toTokenList.result[0]);
     }
   }, [toTokenList]);
@@ -55,23 +55,28 @@ export const TokenSection = ({ data }) => {
     setActiveReceiveToken(token);
   };
 
-  // to maximize the token selection section
-  const maximize = () => {
-    setMinVersion(false);
+  const submit = () => {
+    sendData({
+      fromToken: activeSendToken,
+      toToken: activeReceiveToken,
+      amount: sendAmount,
+    });
   };
 
   return (
-    <Card minimize={minVersion} onClick={minVersion ? maximize : undefined}>
-      {minVersion ? (
-        <h2>Salil naik</h2>
-      ) : (
+    <Card
+      minimize={!maxState}
+      onClick={maxState ? undefined : () => setMaxState(true)}
+    >
+      {maxState ? (
         <>
           <div className="mb-4">
             <p className={style.title}>
               Transform from{" "}
-                <span className={style.balance}>
-                  Balance: {balance} {balance!==0 && activeSendToken.token.symbol}
-                </span>
+              <span className={style.balance}>
+                Balance: {balance}{" "}
+                {balance !== 0 && activeSendToken.token.symbol}
+              </span>
             </p>
             {sendTokens && (
               <TokenSelector
@@ -96,7 +101,24 @@ export const TokenSection = ({ data }) => {
               />
             )}
           </div>
+          <Button block onClick={submit} disabled={!sendAmount}>
+            See all routes
+          </Button>
         </>
+      ) : (
+        <div className="d-flex align-items-center">
+          {sendTokens && (
+            <TokenOption item={activeSendToken.token} classes={style.option} noHover />
+          )}
+          <Arrow style={{ height: "24px" }} />
+          {receiveTokens && (
+            <TokenOption
+              item={activeReceiveToken.token}
+              classes={style.option}
+              noHover
+            />
+          )}
+        </div>
       )}
     </Card>
   );

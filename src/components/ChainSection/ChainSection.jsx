@@ -1,15 +1,14 @@
 import { useEffect, useState } from "react";
 import style from "./chain-section.module.scss";
-import { Card, ChainSelector, Button, ChainOption} from "../index";
+import { Card, ChainSelector, Button, ChainOption } from "../index";
 import { ReactComponent as Arrow } from "../../assets/svgs/arrow-right.svg";
 import { useFetch } from "../../hooks/useFetch";
 
-export const ChainSection = ({ sendData }) => {
+export const ChainSection = ({ sendData, maxState, setMaxState }) => {
   const [sendChains, setSendChains] = useState(false);
   const [receiveChains, setReceiveChains] = useState(false);
   const [activeSendChain, setActiveSendChain] = useState("");
   const [activeReceiveChain, setActiveReceiveChain] = useState("");
-  const [minVersion, setMinVersion] = useState(false); // to minimize the card size
 
   let API = `${process.env.REACT_APP_API_URL}/V1/supported/chains`;
   const allChains = useFetch(API);
@@ -39,27 +38,19 @@ export const ChainSection = ({ sendData }) => {
   };
 
   const submit = () => {
-    setMinVersion(true);
     sendData({
       sendChain: activeSendChain,
       receiveChain: activeReceiveChain,
     });
-  };
-
-  // to maximize the chain selection section
-  const maximize = () => {
-    setMinVersion(false);
+    setMaxState(false);
   };
 
   return (
-    <Card minimize={minVersion} onClick={minVersion ? maximize : undefined}>
-      {minVersion ? (
-        <div className="d-flex align-items-center">
-          <ChainOption item={activeSendChain} active classes={style.option}/>
-          <Arrow style={{height: '24px'}}/>
-          <ChainOption item={activeReceiveChain} active classes={style.option}/>
-        </div>
-      ) : (
+    <Card
+      minimize={!maxState}
+      onClick={maxState ? undefined : () => setMaxState(true)}
+    >
+      {maxState ? (
         <>
           <div className="mb-4">
             <p className={style.title}>Transform from</p>
@@ -87,6 +78,16 @@ export const ChainSection = ({ sendData }) => {
             Begin new transfer
           </Button>
         </>
+      ) : (
+        <div className="d-flex align-items-center">
+          <ChainOption item={activeSendChain} noHover classes={style.option} />
+          <Arrow style={{ height: "24px" }} />
+          <ChainOption
+            item={activeReceiveChain}
+            noHover
+            classes={style.option}
+          />
+        </div>
       )}
     </Card>
   );

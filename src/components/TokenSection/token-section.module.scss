@@ -1,3 +1,5 @@
+@import "../../styles/variables";
+
 .title{
     font-size: 14px; 
     font-weight: 500;
@@ -8,4 +10,17 @@
 .balance{
     text-align: right;
     color: rgb(110, 121, 143);
+}
+
+.option{
+    border: 1px solid $gray-color;
+    border-radius: 10px;
+    background-color: white; 
+    flex-grow: 1;
+
+    span{
+        span:last-child{
+            display: none;
+        }
+    }
 }
