@@ -20,7 +20,7 @@ export const ChainSelector = ({ chains, activeChain, setActiveChain }) => {
 
   return (
     <div className={style.select} onClick={toggleDropdown}>
-      <Option item={activeChain} active />
+      <Option item={activeChain} noHover />
 
       {showOptions && (
         <div className={style["option-container"]}>

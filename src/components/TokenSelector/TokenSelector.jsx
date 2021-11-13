@@ -1,51 +1,68 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import style from "./token-selector.module.scss";
-import { ChainOption as Option, Modal } from "..";
+import { TokenOption as Option, Modal } from "..";
 import { ReactComponent as Arrow } from "../../assets/svgs/angle-down.svg";
 
-export const TokenSelector = ({ tokens, activeToken, setActiveToken }) => {
+export const TokenSelector = ({
+  tokens,
+  activeToken,
+  setActiveToken,
+  amount,
+  setAmount,
+  max = true,
+  readOnly = false,
+}) => {
   const [showTokens, setShowTokens] = useState(false);
-  const [filteredTokens, setFilteredTokens] = useState(tokens);
 
   const toggleTokens = (e) => {
     e.stopPropagation();
     setShowTokens(!showTokens);
   };
 
-  useEffect(() => {
-    setFilteredTokens(tokens.filter((token) => token !== activeToken));
-  }, [activeToken, tokens]);
+  const handleChange = (e) => {
+    setAmount(e.target.value);
+  };
 
   return (
     <>
       <div className={style.tokenSelector}>
-        <input type="number" placeholder="0" />
+        <input
+          type="text"
+          value={amount}
+          onChange={handleChange}
+          placeholder="0"
+          className={style.input}
+          readOnly={readOnly}
+        />
 
-        <button type="button">Max</button>
+        {max && (
+          <button type="button" className={style.maxBtn}>
+            Max
+          </button>
+        )}
 
         <div className={style.tokensSection} onClick={toggleTokens}>
           <Option
             item={activeToken.token}
-            active
+            noHover
             small
             classes={style.tokenOption}
           />
 
-          {showTokens && (
-            <Modal title="select token" onClose={() => setShowTokens(false)}>
-              {filteredTokens.map((item, index) => {
-                return (
-                  <Option
-                    item={item.token}
-                    small
-                    key={`${index}-${item.token.symbol}`}
-                    onClick={() => setActiveToken(item)}
-                    classes={style.tokenOptionList}
-                  />
-                );
-              })}
-            </Modal>
-          )}
+          <Modal title="select token" show={showTokens}>
+            {tokens.map((item, index) => {
+              return (
+                <Option
+                  item={item.token}
+                  small
+                  key={`${index}-${item.token.symbol}`}
+                  onClick={() => setActiveToken(item)}
+                  classes={style.tokenOptionList}
+                  active={activeToken === item}
+                />
+              );
+            })}
+          </Modal>
 
           <Arrow className={`${style.arrow} ${showTokens ? style.up : ""}`} />
         </div>

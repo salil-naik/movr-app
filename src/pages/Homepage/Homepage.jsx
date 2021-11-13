@@ -27,7 +27,7 @@ export const Homepage = () => {
     <>
     <div className="container">
       <div className="row">
-        <div className="col-5">
+        <div className="col-md-5">
             {/* <ChainSection sendData={setChains}/> */}
             <TokenSection data={data}/>
         </div>

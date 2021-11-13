@@ -19,25 +19,41 @@
     border: 1px solid rgba(0, 0, 0, 0.1);
     object-fit: cover;
     background-color: white;
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    text-transform: uppercase;
   }
 
-  &:not(.active) {
+  &:not(.no-hover) {
     &:hover {
-      background-color: $highlight-color;
+      background-color: #f1f3f6
     }
   }
 
   &.active {
     font-weight: 500;
+    background-color: #f1f3f6;
+    position: relative;
+
+    &::after{
+      content: "";
+      position: absolute; 
+      right: 10px;
+      top: 10px;
+      height: 20px; 
+      width: 20px; 
+      background-image: url('../../assets/svgs/check-circle.svg');
+      background-size: cover;
+    }
   }
 
   &.small{
     height: 40px;
-    padding: 10px;
+    padding: 0 10px;
 
-    &__icon {
-      height: 20px;
-      width: 20px;
+    .option__icon {
       margin-right: 10px;
     }
   }

@@ -1,4 +1,11 @@
 .title{
     font-size: 14px; 
     font-weight: 500;
+    display:flex; 
+    justify-content: space-between;
+}
+
+.balance{
+    text-align: right;
+    color: rgb(110, 121, 143);
 }
