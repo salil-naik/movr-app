@@ -1,0 +1,29 @@
+.searchBar{
+    border: 1px solid #E7E9EE;
+    border-radius: 8px;
+    height: 36px;
+    position: relative; 
+    overflow:hidden;
+    margin-bottom: 15px;
+
+    &::after{
+        content:' ';
+        position: absolute; 
+        height: 18px; 
+        width: 18px; 
+        background-image: url('../../assets/svgs/search.svg');
+        background-size: cover;
+        background-repeat: no-repeat;
+        top: 8px;
+        left: 11px;
+    }
+
+    &__input{
+        height: 34px; 
+        outline: none; 
+        padding: 0 20px 0 40px;
+        width: 100%;
+        font-size: 14px; 
+        border:0;
+    }
+}

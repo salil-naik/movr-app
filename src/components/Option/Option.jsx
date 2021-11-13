@@ -43,7 +43,7 @@ export const TokenOption = ({
   noHover,
 }) => {
   useEffect(()=> {
-    console.log('run');
+    console.log('option run');
   }, [])
   return (
     <div

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import style from "./token-selector.module.scss";
-import { TokenOption as Option, Modal } from "..";
+import { TokenOption as Option, Modal, SearchBar } from "..";
 import { ReactComponent as Arrow } from "../../assets/svgs/angle-down.svg";
 
 export const TokenSelector = ({
@@ -13,14 +13,38 @@ export const TokenSelector = ({
   readOnly = false,
 }) => {
   const [showTokens, setShowTokens] = useState(false);
+  const [filteredTokens, setFilteredTokens] = useState(tokens);
 
   const toggleTokens = (e) => {
-    e.stopPropagation();
+    // e.stopPropagation();
     setShowTokens(!showTokens);
   };
 
   const handleChange = (e) => {
     setAmount(e.target.value);
+  };
+
+  const handleTokenChange = (token) => {
+    setActiveToken(token);
+    toggleTokens();
+  };
+
+  const filterTokens = (search) => {
+    if (search.length > 0) {
+      const regex = new RegExp(search, "gi");
+      let filteredTokens = tokens.filter((item) => {
+        if (
+          (item.token.name && item.token.name.match(regex)) ||
+          (item.token.symbol && item.token.symbol.match(regex))
+        ) {
+          return item;
+        }
+      });
+
+      setFilteredTokens(filteredTokens);
+    } else {
+      setFilteredTokens(tokens);
+    }
   };
 
   return (
@@ -48,24 +72,30 @@ export const TokenSelector = ({
             small
             classes={style.tokenOption}
           />
+          <Arrow className={`${style.arrow} ${showTokens ? style.up : ""}`} />
+        </div>
 
-          <Modal title="select token" show={showTokens}>
-            {tokens.map((item, index) => {
+        <Modal title="select token" onShow={showTokens} onClose={toggleTokens}>
+          <SearchBar onChange={filterTokens} />
+          {filteredTokens.length > 0 ? (
+            filteredTokens.map((item, index) => {
               return (
                 <Option
                   item={item.token}
                   small
                   key={`${index}-${item.token.symbol}`}
-                  onClick={() => setActiveToken(item)}
+                  onClick={() => {
+                    handleTokenChange(item);
+                  }}
                   classes={style.tokenOptionList}
                   active={activeToken === item}
                 />
               );
-            })}
-          </Modal>
-
-          <Arrow className={`${style.arrow} ${showTokens ? style.up : ""}`} />
-        </div>
+            })
+          ) : (
+            <p className={style.noTokensText}>Tokens not found</p>
+          )}
+        </Modal>
       </div>
     </>
   );

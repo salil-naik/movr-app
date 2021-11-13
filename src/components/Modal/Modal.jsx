@@ -1,8 +1,8 @@
 import style from "./modal.module.scss";
 
-export const Modal = ({ children, onClose, title, show }) => {
+export const Modal = ({ children, onClose, title, onShow }) => {
   return (
-    <div className={`${style.modalOverlay} ${show ? style.show : ""}`}>
+    <div className={`${style.modalOverlay} ${onShow ? style.show : ""}`}>
       <div className={style.modal}>
         <div className={style.modalHeader}>{title}</div>
         <button className={style.close} onClick={onClose}>

@@ -46,7 +46,7 @@ export const TokenSection = ({ data }) => {
 
   useEffect(() => {
     if (toTokenList !== null) {
-      setReceiveTokens(toTokenList.result);
+      setReceiveTokens(toTokenList.result.slice(0,5));
       setActiveReceiveToken(toTokenList.result[0]);
     }
   }, [toTokenList]);

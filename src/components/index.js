@@ -7,6 +7,7 @@ import { Button } from "./Button/Button";
 import { TokenSection } from "./TokenSection/TokenSection";
 import { TokenSelector } from "./TokenSelector/TokenSelector";
 import { Modal } from "./Modal/Modal";
+import { SearchBar } from "./SearchBar/SearchBar";
 
 export {
   Header,
@@ -18,5 +19,6 @@ export {
   Button,
   TokenSection,
   TokenSelector,
-  Modal
+  Modal,
+  SearchBar
 };
