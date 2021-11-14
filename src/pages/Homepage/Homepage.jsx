@@ -8,8 +8,8 @@ export const Homepage = () => {
   const [expandChainsSection, setExpandChainsSection] = useState(true);
 
   const [data, setData] = useState({
-    sendChain: "",
-    receiveChain: "",
+    sendChain: {chainId: 1},
+    receiveChain: {chainId: 250},
     sendToken: "",
     receiveToken: "",
     amount: "",

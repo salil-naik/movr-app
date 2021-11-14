@@ -9,6 +9,7 @@ export const TokenSelector = ({
   setActiveToken,
   amount,
   setAmount,
+  activeTokenBalance,
   max = true,
   readOnly = false,
 }) => {
@@ -27,6 +28,10 @@ export const TokenSelector = ({
   const handleTokenChange = (token) => {
     setActiveToken(token);
     toggleTokens();
+  };
+
+  const handleMax = () => {
+    setAmount(activeTokenBalance);
   };
 
   const filterTokens = (search) => {
@@ -60,7 +65,7 @@ export const TokenSelector = ({
         />
 
         {max && (
-          <button type="button" className={style.maxBtn}>
+          <button type="button" className={style.maxBtn} onClick={handleMax}>
             Max
           </button>
         )}

@@ -22,7 +22,7 @@ export const TokenSection = ({ data, sendData, maxState, setMaxState }) => {
 
   useEffect(() => {
     if (fromTokenList !== null) {
-      setSendTokens(fromTokenList.result.slice(0, 5));
+      setSendTokens(fromTokenList.result);
       setActiveSendToken(fromTokenList.result[1]);
     }
   }, [fromTokenList]);
@@ -85,6 +85,7 @@ export const TokenSection = ({ data, sendData, maxState, setMaxState }) => {
                 setActiveToken={sendTokenChange}
                 amount={sendAmount}
                 setAmount={setSendAmount}
+                activeTokenBalance={balance}
               />
             )}
           </div>
