@@ -16,7 +16,7 @@ export function useFetch(url, options) {
 
   useEffect(() => {
     fetchData(url);
-  }, []);
+  }, [url]);
 
   return data;
 }
