@@ -1,14 +1,20 @@
 import { useEffect, useState } from "react";
 import style from "./chain-section.module.scss";
+
+// components
 import { Card, ChainSelector, Button, ChainOption } from "../index";
 import { ReactComponent as Arrow } from "../../assets/svgs/arrow-right.svg";
+
+// hooks
 import { useFetch } from "../../hooks/useFetch";
+import { useWeb3React } from "@web3-react/core";
 
 export const ChainSection = ({ sendData, maxState, setMaxState }) => {
   const [sendChains, setSendChains] = useState(false);
   const [receiveChains, setReceiveChains] = useState(false);
   const [activeSendChain, setActiveSendChain] = useState("");
   const [activeReceiveChain, setActiveReceiveChain] = useState("");
+  const { active, chainId } = useWeb3React();
 
   let API = `${process.env.REACT_APP_API_URL}/V1/supported/chains`;
   const allChains = useFetch(API);
@@ -28,6 +34,14 @@ export const ChainSection = ({ sendData, maxState, setMaxState }) => {
       setActiveReceiveChain(receiveChainsArr[1]);
     }
   }, [allChains]);
+
+  // set the activeSendChain as per the injected provider
+  useEffect(()=>{
+    if(active){
+      let selectedNetwork = sendChains.find(chain => chain.chainId === chainId);
+      setActiveSendChain(selectedNetwork);
+    }
+  }, [active, chainId])
 
   const setSendChain = (chain) => {
     setActiveSendChain(chain);
@@ -74,8 +88,8 @@ export const ChainSection = ({ sendData, maxState, setMaxState }) => {
             )}
           </div>
 
-          <Button block onClick={submit}>
-            Begin new transfer
+          <Button block onClick={submit} disabled={!active}>
+            {active ? "Begin new transfer" : "Please connect to a wallet"}
           </Button>
         </>
       ) : (

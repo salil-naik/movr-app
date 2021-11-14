@@ -1,18 +1,19 @@
-import { useState, useEffect } from "react";
+import { useWeb3React } from "@web3-react/core";
+import { useState } from "react";
 // import style from "./homepage.module.scss";
 import { ChainSection, TokenSection } from "../../components/index";
 
 export const Homepage = () => {
   const [isSectionTwoActive, setIsSectionTwoActive] = useState(false);
-
   const [expandChainsSection, setExpandChainsSection] = useState(true);
 
+  let defaultChains = {sendChain: 1, receiveChain: 137}
+
   const [data, setData] = useState({
-    sendChain: {chainId: 1},
-    receiveChain: {chainId: 250},
+    sendChain: {chainId: defaultChains.sendChain},
+    receiveChain: {chainId: defaultChains.receiveChain},
     sendToken: "",
     receiveToken: "",
-    amount: "",
   });
 
   const setChains = (chain) => {
@@ -33,9 +34,7 @@ export const Homepage = () => {
     });
   };
 
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
+  const {active, account, chainId} = useWeb3React();
 
   return (
     <>
