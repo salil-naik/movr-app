@@ -16,9 +16,14 @@ export const TokenSection = ({ data, sendData, maxState, setMaxState }) => {
   const [TO_TOKEN_API, setTO_TOKEN_API] = useState("");
 
   useEffect(() => {
+    let isMounted = true;
+
+    if(isMounted) {
     setFROM_TOKEN_API(`${process.env.REACT_APP_API_URL}/v1/supported/from-token-list?fromChainId=${data.sendChain.chainId}&toChainId=${data.receiveChain.chainId}`)
     setTO_TOKEN_API(`${process.env.REACT_APP_API_URL}/v1/supported/to-token-list?fromChainId=${data.sendChain.chainId}&toChainId=${data.receiveChain.chainId}`)
+    }
 
+    return () => {isMounted = false}
   }, [data]);
 
   // balances
@@ -42,7 +47,7 @@ export const TokenSection = ({ data, sendData, maxState, setMaxState }) => {
   const sendTokenChange = (token) => {
     setActiveSendToken(token);
     setBalance(0);
-    setSendAmount("");
+    // setSendAmount("");
 
     bal.result.map((token) => {
       if (token.chainId === activeSendToken.chainId) {

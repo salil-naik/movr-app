@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import style from "./token-selector.module.scss";
 import { TokenOption as Option, Modal, SearchBar } from "..";
 import { ReactComponent as Arrow } from "../../assets/svgs/angle-down.svg";
@@ -51,6 +51,10 @@ export const TokenSelector = ({
       setFilteredTokens(tokens);
     }
   };
+
+  useEffect(() => {
+    setFilteredTokens(tokens);
+  }, [tokens]);
 
   return (
     <>
