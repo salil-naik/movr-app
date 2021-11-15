@@ -1,5 +1,5 @@
 import { useWeb3React } from "@web3-react/core";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 // import style from "./homepage.module.scss";
 import { ChainSection, TokenSection, Quotes } from "../../components/";
 
@@ -9,7 +9,7 @@ export const Homepage = () => {
   const [expandChainsSection, setExpandChainsSection] = useState(true);
   const [showQuote, setShowQuote] = useState(false);
 
-  let defaultChains = {sendChain: 1, receiveChain: 10}
+  let defaultChains = {sendChain: 10, receiveChain: 1}
 
   const [data, setData] = useState({
     sendChain: {chainId: defaultChains.sendChain},
@@ -23,8 +23,8 @@ export const Homepage = () => {
     setIsSectionTwoActive(true);
     setData({
       ...data,
-      sendChain: chain.sendChain,
-      receiveChain: chain.receiveChain,
+      sendChain: {...chain.sendChain, chainId: chain.sendChain.chainId},
+      receiveChain: {...chain.receiveChain, chainId: chain.receiveChain.chainId},
     });
   };
 
@@ -39,8 +39,6 @@ export const Homepage = () => {
 
     token.amount && setShowQuote(true);
   };
-
-  const {active, account, chainId} = useWeb3React();
 
   return (
     <>

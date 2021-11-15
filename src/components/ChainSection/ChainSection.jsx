@@ -16,7 +16,7 @@ export const ChainSection = ({ sendData, maxState, setMaxState }) => {
   const [activeReceiveChain, setActiveReceiveChain] = useState("");
   const { active, chainId } = useWeb3React();
 
-  let API = `${process.env.REACT_APP_API_URL}/V1/supported/chains`;
+  let API = `${process.env.REACT_APP_API_URL}/v1/supported/chains`;
   const [allChains, chainsLoading] = useFetch(API);
 
   useEffect(() => {
@@ -36,26 +36,34 @@ export const ChainSection = ({ sendData, maxState, setMaxState }) => {
   }, [allChains]);
 
   // set the activeSendChain as per the injected provider
-  useEffect(()=>{
-    if(active){
-      let selectedNetwork = sendChains.find(chain => chain.chainId === chainId);
+  useEffect(() => {
+    if (active) {
+      let selectedNetwork = sendChains.find(
+        (chain) => chain.chainId === chainId
+      );
       setActiveSendChain(selectedNetwork);
     }
-  }, [active, chainId])
+  }, [active, chainId]);
 
   const setSendChain = (chain) => {
     setActiveSendChain(chain);
+    // updateData();
   };
 
   const setReceiveChain = (chain) => {
     setActiveReceiveChain(chain);
+    // updateData();
   };
 
-  const submit = () => {
+  const updateData = () => {
     sendData({
       sendChain: activeSendChain,
       receiveChain: activeReceiveChain,
     });
+  };
+
+  const submit = () => {
+    updateData();
     setMaxState(false);
   };
 
