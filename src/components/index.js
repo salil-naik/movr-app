@@ -8,6 +8,7 @@ import { TokenSection } from "./TokenSection/TokenSection";
 import { TokenSelector } from "./TokenSelector/TokenSelector";
 import { Modal } from "./Modal/Modal";
 import { SearchBar } from "./SearchBar/SearchBar";
+import { Quotes } from "./Quotes/Quotes";
 
 export {
   Header,
@@ -20,5 +21,6 @@ export {
   TokenSection,
   TokenSelector,
   Modal,
-  SearchBar
+  SearchBar,
+  Quotes
 };

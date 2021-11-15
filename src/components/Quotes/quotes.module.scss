@@ -1,0 +1,140 @@
+@import "../../styles/variables";
+
+.title {
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+.quoteCard {
+  background-color: rgba(255, 255, 255, 1);
+  border-radius: 20px;
+  padding: 32px;
+  margin-bottom: 15px;
+  display: flex;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.03), 0px 1px 4px rgba(0, 0, 0, 0.04),
+    0px 20px 40px rgba(0, 0, 0, 0.04);
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+
+  &:hover {
+    background-color: white;
+  }
+}
+
+// for TokenDetails component
+.infoCard {
+  // background-color: white;
+  border: 1px solid $gray-color;
+  padding: 10px 15px;
+  border-radius: 10px;
+  font-size: 12px;
+  line-height: 20px;
+  flex-grow: 1;
+}
+
+.amount {
+  font-weight: 500;
+  padding-right: 5px;
+}
+
+.symbol {
+  color: #6e798f;
+}
+
+.icon {
+  margin-left: 5px;
+  height: 20px;
+  width: 20px;
+  border-radius: 10px;
+  border: 1px solid rgba(8, 6, 6, 0.07);
+}
+
+.chainTag {
+  display: inline-flex;
+  margin-top: 6px;
+  font-size: 10px;
+  padding: 0 10px;
+  border-radius: 3px;
+  background-color: $highlight-color;
+  color: #333;
+  font-weight: 500;
+
+  &.polygon {
+    color: #854ce6;
+  }
+}
+
+// For Connector component
+.connector {
+  font-size: 10px;
+  color: #6e798f;
+  text-align: center;
+  padding: 0 20px;
+  min-width: 100px;
+}
+
+.connectorTitle {
+  font-weight: 500;
+  color: #000;
+  text-transform: capitalize;
+}
+
+.connectorFee {
+  color: #6e798f;
+  text-align: center;
+}
+
+.placeholderCard {
+  width: 138px;
+  height: 68px;
+  border-radius: 10px;
+  padding: 10px 15px;
+  position: relative;
+
+background: 
+    linear-gradient(0.25turn, transparent, #fff, transparent),
+    linear-gradient(#eee, #eee),
+    radial-gradient(38px circle at 19px 19px, #eee 50%, transparent 51%),
+    linear-gradient(#eee, #eee);  
+  background-repeat: no-repeat;
+  background-size: 315px 250px, 315px 180px, 100px 100px, 225px 30px; 
+  background-position: -315px 0, 0 0, 0px 190px, 50px 195px; 
+  animation: loading 1.5s infinite;
+
+  &::after {
+    content: "";
+    width: 75px;
+    height: 20px;
+    border-radius: 3px;
+    position: absolute;
+    left: 15px;
+    bottom: 10px;
+    background: white; 
+
+    background: linear-gradient(
+        to right,
+        rgba(255, 255, 255, 0),
+        rgba(255, 255, 255, 0.5) 50%,
+        rgba(255, 255, 255, 0) 80%
+      ),
+      lightgray;
+    background-repeat: repeat-y;
+    background-size: 50px 200px;
+    background-position: 0 0;
+    animation: loading 1.5s infinite;
+  }
+
+  @keyframes shine {
+    to {
+      background-position: 100% 0;
+    }
+  }
+
+  @keyframes loading {  
+    to {
+      background-position: 315px 0, 0 0, 0 190px, 50px 195px;
+    }
+  }
+}

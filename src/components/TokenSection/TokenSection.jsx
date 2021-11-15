@@ -15,15 +15,15 @@ export const TokenSection = ({ data, sendData, maxState, setMaxState }) => {
 
   // balances
   let balAPI = `${process.env.REACT_APP_API_URL}/V1/balances?userAddress=${account}`;
-  let bal = useFetch(balAPI);
-  console.log("balance", bal);
+  let [bal, balLoading] = useFetch(balAPI);
+  // console.log("balance", bal);
 
   // from token list
   const [sendTokens, setSendTokens] = useState(false);
   const [activeSendToken, setActiveSendToken] = useState(false);
 
   let FROM_TOKEN_API = `${process.env.REACT_APP_API_URL}/V1/supported/from-token-list?fromChainId=${data.sendChain.chainId}&toChainId=${data.receiveChain.chainId}`;
-  const fromTokenList = useFetch(FROM_TOKEN_API);
+  const [fromTokenList, fromListLoading] = useFetch(FROM_TOKEN_API);
 
   useEffect(() => {
     if (fromTokenList !== null) {
@@ -39,14 +39,14 @@ export const TokenSection = ({ data, sendData, maxState, setMaxState }) => {
 
     // test this once
     bal.result.map((token) => {
-      console.log(
-        "bal",
-        token.address,
-        "active",
-        activeSendToken.token.address
-      );
+      // console.log(
+      //   "bal",
+      //   token.address,
+      //   "active",
+      //   activeSendToken.token.address
+      // );
       if (token.chainId === activeSendToken.chainId) {
-        console.log(token.chainId, activeSendToken.chainId);
+        // console.log(token.chainId, activeSendToken.chainId);
         if (token.address === activeSendToken.token.address) {
           console.log("same address");
           setBalance(token.amount);
@@ -60,7 +60,7 @@ export const TokenSection = ({ data, sendData, maxState, setMaxState }) => {
   const [activeReceiveToken, setActiveReceiveToken] = useState(false);
 
   let TO_TOKEN_API = `${process.env.REACT_APP_API_URL}/V1/supported/to-token-list?fromChainId=${data.sendChain.chainId}&toChainId=${data.receiveChain.chainId}`;
-  const toTokenList = useFetch(TO_TOKEN_API);
+  const [toTokenList, toListLoading] = useFetch(TO_TOKEN_API);
 
   useEffect(() => {
     if (toTokenList !== null) {

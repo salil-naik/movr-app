@@ -17,7 +17,7 @@ export const ChainSection = ({ sendData, maxState, setMaxState }) => {
   const { active, chainId } = useWeb3React();
 
   let API = `${process.env.REACT_APP_API_URL}/V1/supported/chains`;
-  const allChains = useFetch(API);
+  const [allChains, chainsLoading] = useFetch(API);
 
   useEffect(() => {
     if (allChains !== null) {

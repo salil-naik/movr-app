@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+// import { useEffect } from "react";
 import style from "./option.module.scss";
 
 export const ChainOption = ({
@@ -42,9 +42,9 @@ export const TokenOption = ({
   small,
   noHover,
 }) => {
-  useEffect(()=> {
-    console.log('option run');
-  }, [])
+  // useEffect(()=> {
+  //   console.log('option run');
+  // }, [])
   return (
     <div
       className={`${style.option} ${active ? style.active : ""} ${classes} ${
